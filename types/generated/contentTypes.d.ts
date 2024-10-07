@@ -735,6 +735,36 @@ export interface ApiMilestoneMilestone extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiNumberStatisticNumberStatistic
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'number_statistics';
+  info: {
+    singularName: 'number-statistic';
+    pluralName: 'number-statistics';
+    displayName: 'Number Statistic';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    value: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    label: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::number-statistic.number-statistic'
+    >;
+  };
+}
+
 export interface ApiProfileProfile extends Struct.SingleTypeSchema {
   collectionName: 'profiles';
   info: {
@@ -831,6 +861,41 @@ export interface ApiProjectFeatureProjectFeature
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::project-feature.project-feature'
+    >;
+  };
+}
+
+export interface ApiStatisticStatistic extends Struct.CollectionTypeSchema {
+  collectionName: 'statistics';
+  info: {
+    singularName: 'statistic';
+    pluralName: 'statistics';
+    displayName: 'Statistic';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    type: Schema.Attribute.Enumeration<['number', 'text']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'number'>;
+    text: Schema.Attribute.Text;
+    number_statistic: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::number-statistic.number-statistic'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::statistic.statistic'
     >;
   };
 }
@@ -1249,9 +1314,11 @@ declare module '@strapi/strapi' {
       'api::company.company': ApiCompanyCompany;
       'api::global.global': ApiGlobalGlobal;
       'api::milestone.milestone': ApiMilestoneMilestone;
+      'api::number-statistic.number-statistic': ApiNumberStatisticNumberStatistic;
       'api::profile.profile': ApiProfileProfile;
       'api::project.project': ApiProjectProject;
       'api::project-feature.project-feature': ApiProjectFeatureProjectFeature;
+      'api::statistic.statistic': ApiStatisticStatistic;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
