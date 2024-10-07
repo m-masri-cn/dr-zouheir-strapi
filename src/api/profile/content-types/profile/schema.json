@@ -44,6 +44,23 @@
     "location": {
       "type": "string",
       "required": true
+    },
+    "headerImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "instagramLink": {
+      "type": "string"
+    },
+    "linkedinLink": {
+      "type": "string"
+    },
+    "facebookLink": {
+      "type": "string"
     }
   }
 }

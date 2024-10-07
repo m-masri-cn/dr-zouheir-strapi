@@ -788,6 +788,10 @@ export interface ApiProfileProfile extends Struct.SingleTypeSchema {
     >;
     position: Schema.Attribute.String & Schema.Attribute.Required;
     location: Schema.Attribute.String & Schema.Attribute.Required;
+    headerImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    instagramLink: Schema.Attribute.String;
+    linkedinLink: Schema.Attribute.String;
+    facebookLink: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
